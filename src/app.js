@@ -1,6 +1,6 @@
 const yargs = require("yargs")
 const { sequelize } = require("./db/connection")
-const { addMovie, listMovie, updateMovie, showTable, deleteMovie } = require("./movie/functions")
+const { addMovie, listMovie, updateMovie, deleteMovie, showMovie } = require("./movie/functions")
 const { addUser, listUser, updateUser, showUser, deleteUser, testInnerJoin } = require("./users/userFunctions")
 
 const app = async (yargsObject) =>
@@ -10,11 +10,7 @@ const app = async (yargsObject) =>
         await sequelize.sync()
         if (yargsObject.create)
         {
-            await addMovie({ title: yargsObject.title, actor: yargsObject.actor, UserId: yargsObject.UserId })
-            console.log(await listMovie())
-        }
-        else if (yargsObject.read)
-        {
+            await addMovie({ title: yargsObject.title, actor: yargsObject.actor })
             console.log(await listMovie())
         }
         else if (yargsObject.update)
@@ -23,7 +19,7 @@ const app = async (yargsObject) =>
         }
         else if (yargsObject.display)
         {
-            await showTable()
+            await showMovie()
         }
         else if (yargsObject.delMovie)
         {
@@ -33,8 +29,7 @@ const app = async (yargsObject) =>
 
         else if (yargsObject.createUser)
         {
-            await addUser({ name: yargsObject.name, age: yargsObject.age })
-            console.log(await listUser())
+            await addUser({ name: yargsObject.name, age: yargsObject.age, MovieId: yargsObject.MovieId })
         }
         else if (yargsObject.readUser)
         {

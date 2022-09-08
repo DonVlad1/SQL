@@ -10,6 +10,10 @@ const User = sequelize.define("User", {
     age: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
+    },
+    MovieId: {
+        type: DataTypes.INTEGER,
+        allowNullL: false
     }
 })
 

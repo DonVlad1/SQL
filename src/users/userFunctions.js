@@ -1,15 +1,15 @@
 const User = require("./userTable")
 const Movie = require("../movie/table")
 
-
+Movie.hasMany(User);
+User.belongsTo(Movie, { foreignKey: 'MovieId' });
 
 exports.testInnerJoin = async () =>
 {
     try
     {
-        return await User.findAll()
-        // users = User.findAll({ include: Movie })
-        // return console.log(users, null, 2)
+        const data = await User.findAll({ include: Movie })
+        return console.log(JSON.stringify(data, null, 2))
     }
     catch (error)
     {

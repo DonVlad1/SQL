@@ -71,7 +71,7 @@ exports.updateMovie = async (yargsObject) =>
     console.log('yes');
 }
 
-exports.showTable = async () =>
+exports.showMovie = async () =>
 {
     try
     {
