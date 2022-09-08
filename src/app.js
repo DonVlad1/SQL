@@ -1,6 +1,6 @@
 const yargs = require("yargs")
 const { sequelize } = require("./db/connection")
-const { addMovie, listMovie, updateMovie, showTable } = require("./movie/functions")
+const { addMovie, listMovie, updateMovie, showTable, deleteMovie } = require("./movie/functions")
 
 const app = async (yargsObject) =>
 {
@@ -24,6 +24,11 @@ const app = async (yargsObject) =>
         else if (yargsObject.display)
         {
             await showTable()
+        }
+        if (yargsObject.delMovie)
+        {
+            await deleteMovie({ title: yargsObject.title, actor: yargsObject.actor })
+            console.log(await listMovie())
         }
         else
         {

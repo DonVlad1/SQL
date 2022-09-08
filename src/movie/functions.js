@@ -46,6 +46,19 @@ exports.updateMovie = async (movieObject) =>
     }
 }
 
+exports.deleteMovie = async (movieObject) =>
+{
+    try
+    {
+        return await Movie.destroy({ where: movieObject })
+    }
+    catch (error)
+    {
+        console.log(error)
+    }
+}
+
+
 exports.updateMovie = async (yargsObject) =>
 {
     await Movie.update(
