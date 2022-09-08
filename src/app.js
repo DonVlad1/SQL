@@ -1,6 +1,6 @@
 const yargs = require("yargs")
 const { sequelize } = require("./db/connection")
-const { addMovie, listMovie, updateMovie } = require("./movie/functions")
+const { addMovie, listMovie, updateMovie, showTable } = require("./movie/functions")
 
 const app = async (yargsObject) =>
 {
@@ -21,16 +21,23 @@ const app = async (yargsObject) =>
             await updateMovie({ title: yargsObject.title, actor: yargsObject.actor, titleR: yargsObject.titleR, actorR: yargsObject.actorR })
             // console.log(await listMovie())
         }
+        else if (yargsObject.display)
+        {
+            await showTable()
+        }
         else
         {
             console.log("Incorrect Command")
         }
+        sequelize.close()
     }
+
     catch (error)
     {
         console.log("Error happened, plz help")
         console.log(error)
     }
+
 }
 
 app(yargs.argv)

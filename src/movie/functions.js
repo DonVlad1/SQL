@@ -45,3 +45,27 @@ exports.updateMovie = async (movieObject) =>
         console.log(error)
     }
 }
+
+exports.updateMovie = async (yargsObject) =>
+{
+    await Movie.update(
+        {
+            title: yargsObject.newTitle
+        },
+        {
+            where: { title: yargsObject.title }
+        });
+    console.log('yes');
+}
+
+exports.showTable = async () =>
+{
+    try
+    {
+        let list = await Movie.findAll();
+        console.table(list.map(({ id, title, actor }) => ({ id, title, actor })));
+    } catch (error)
+    {
+        console.log(error)
+    }
+};
