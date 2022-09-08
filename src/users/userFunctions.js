@@ -1,22 +1,35 @@
 const User = require("./userTable")
 const Movie = require("../movie/table")
+const { QueryTypes } = require("sequelize")
+const { sequelize } = require("../db/connection")
 
 Movie.hasMany(User);
 User.belongsTo(Movie, { foreignKey: 'MovieId' });
+
+// exports.ble = async () =>
+// {
+//     try
+//     {
+//         const data = await User.findAll({ include: Movie })
+//         return console.log(JSON.stringify(data, null, 2))
+//     }
+//     catch (error)
+//     {
+//         console.log(error)
+//     }
+// }
 
 exports.testInnerJoin = async () =>
 {
     try
     {
-        const data = await User.findAll({ include: Movie })
-        return console.log(JSON.stringify(data, null, 2))
-    }
-    catch (error)
+        let list = await sequelize.query("SELECT * FROM Users INNER JOIN Movies ON Users.MovieId = Movies.id ", { type: QueryTypes.SELECT });
+        console.table(list.map(({ id, name, age, title }) => ({ id, name, age, title })));
+    } catch (error)
     {
         console.log(error)
     }
-}
-
+};
 
 exports.addUser = async (userObject) =>
 {
