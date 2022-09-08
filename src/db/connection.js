@@ -1,4 +1,4 @@
-require("dotenv").config
-const { Sequalize } = require("sequelize")
+require("dotenv").config()
+const { Sequelize } = require("sequelize")
 
-exports.Sequalize = new Sequalize(process.env.MYSQL_URI)
+exports.sequelize = new Sequelize(process.env.MYSQL_URI)
